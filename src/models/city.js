@@ -17,7 +17,7 @@ const schemaKeystone = new List(schemaName, {
 	singular: 'city'
 });
 schemaKeystone.add(schemaData);
-schemaKeystone.defaultColumns = 'name.en';
+schemaKeystone.defaultColumns = 'name.fr, country, lat, lng';
 schemaKeystone.register();
 
 export default schemaKeystone.model;

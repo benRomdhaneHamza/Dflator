@@ -1,0 +1,46 @@
+{
+	"name": "api_dflator",
+	"version": "1.0.0",
+	"description": "",
+	"main": "./src/server.js",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1",
+		"start": "node server.js",
+		"dev": "npm run clear:babel-cache && babel-watch --exclude locales/ ./src/server.js",
+		"admin": "babel-node ./src/initKeystone.js --standalone",
+		"clean": "rm -rf dist && mkdir dist",
+		"build": "npm run clean && babel src -d dist -s --copy-files",
+		"doc": "rm -rf out && mkdir out && jsdoc src -r -c .JSdoc.json -d out",
+		"clear:babel-cache": "rimraf -rf ./node_modules/.cache/babel-loader/*"
+	},
+	"author": "",
+	"license": "ISC",
+	"dependencies": {
+		"@babel/core": "^7.2.2",
+		"body-parser": "^1.18.3",
+		"connect-mongo": "^2.0.3",
+		"cookie-parser": "^1.4.4",
+		"dotenv": "^6.2.0",
+		"express": "^4.16.4",
+		"http": "0.0.0",
+		"keystone": "^4.0.0",
+		"mongoose": "^5.4.13",
+		"morgan": "^1.9.1"
+	},
+	"devDependencies": {
+		"babel-cli": "^6.26.0",
+		"babel-plugin-inline-dotenv": "^1.1.2",
+		"babel-plugin-module-resolver": "^3.1.1",
+		"babel-plugin-transform-object-rest-spread": "^7.0.0-beta.3",
+		"babel-preset-env": "^1.6.1",
+		"babel-watch": "git+https://github.com/kmagiera/babel-watch.git",
+		"eslint": "^4.19.1",
+		"eslint-config-airbnb-base": "^12.1.0",
+		"eslint-import-resolver-babel-module": "^4.0.0",
+		"eslint-plugin-import": "^2.13.0",
+		"jest": "^22.4.3",
+		"jsdoc": "^3.5.5",
+		"nodemon": "^1.18.4",
+		"rimraf": "^2.6.2"
+	}
+}

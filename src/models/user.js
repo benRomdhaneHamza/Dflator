@@ -18,6 +18,10 @@ const schemaData = {
 		required: true,
 		initial: true
 	},
+	confirmed: {
+		type: Boolean,
+		default: false
+	},
 	password: {
 		type: String
 	},

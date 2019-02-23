@@ -4,13 +4,11 @@
 	"description": "",
 	"main": "./src/server.js",
 	"scripts": {
-		"test": "echo \"Error: no test specified\" && exit 1",
-		"start": "node server.js",
+		"clean": "rm -rf build && mkdir build",
+		"build-babel": "babel -d ./build ./src -s",
+		"build": "npm run clean && npm run build-babel",
+		"start": "npm run build && node ./build/server.js",
 		"dev": "npm run clear:babel-cache && babel-watch --exclude locales/ ./src/server.js",
-		"admin": "babel-node ./src/initKeystone.js --standalone",
-		"clean": "rm -rf dist && mkdir dist",
-		"build": "npm run clean && babel src -d dist -s --copy-files",
-		"doc": "rm -rf out && mkdir out && jsdoc src -r -c .JSdoc.json -d out",
 		"clear:babel-cache": "rimraf -rf ./node_modules/.cache/babel-loader/*"
 	},
 	"author": "",

@@ -1,5 +1,7 @@
 import UserController from '@/controllers/user'
 import express from 'express';
+import Token from "@/utils/token";
+import Authentication from "@/middelwares/authentication";
 
 const router = express.Router();
 
@@ -12,7 +14,6 @@ router.get('/', async (req, res) => {
 // ******************************************************
 
 // TODO BODY VALIDATION
-// TODO TOKEN STUFF
 router.post('/signup', async(req, res) => {
 	const newUser = req.body;
 	newUser.email = newUser.email.toLowerCase();
@@ -21,15 +22,29 @@ router.post('/signup', async(req, res) => {
 	const addedUser = await UserController.addUser(newUser);
 	if (!addedUser) if (userExist) return res.status(403).send({ errorSignup: true });
 	// SEND CONFIRMATION MAIL
-	res.status(201).send(addedUser);
+	const loginToken = Token.getLoginToken(addedUser);
+	res.status(201).send({ token: loginToken, user: addedUser });
 });
 
+// ******************************************************
+// USER LOGIN
+// ******************************************************
+
 // TODO BODY VALIDATION
-// TODO TOKEN STUFF
 router.post('/login', async(req, res) => {
 	const user = await UserController.login(req.body);
 	if (!user) return res.status(404).send({ wrongCredentials: true });
-	res.status(201).send(user);
+	const loginToken = Token.getLoginToken(user);
+	res.status(200).send({ token: loginToken, user });
+});
+
+
+
+router.get('/test', Authentication(), async(req, res) => {
+	const user = res.locals.user;
+	res.status(200).send(user);
 })
+
+
 
 export default router;

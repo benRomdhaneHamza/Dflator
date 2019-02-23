@@ -3,6 +3,18 @@ import bcrypt from 'bcrypt';
 
 class userController {
 
+	static findById(_userId) {
+		return new Promise((resolve, reject) => {
+			User.findById(_userId)
+			.populate({ path: 'city' })
+			.exec().then(_user => {
+				if (!_user) return resolve(null);
+				_user.password = undefined;
+				return resolve(_user);
+			}).catch(reject);
+		});
+	}
+
 	static checkIfUserExists(_email) {
 		return new Promise((resolve, reject) => {
 			User.findOne({ email: _email}).exec().then(_user => {
@@ -35,7 +47,7 @@ class userController {
 				_foundUser.password = undefined;
 				return resolve(_foundUser);
 			}).catch(reject);
-		})
+		});
 	}
 }
 

@@ -3,7 +3,7 @@ import app from '@/app';
 
 require('dotenv').config();
 
-const PORT = process.env.DFLATOR_API_PORT || 8080;
+const PORT = process.env.PORT || 8080;
 
 console.log('NODE_ENV', process.env.NODE_ENV);
 

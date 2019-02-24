@@ -1,4 +1,4 @@
-import Token from '@/utils/Token';
+import Token from '@/utils/token';
 import UserController from "@/controllers/user";
 export default (required) => {
 	return async(req, res, next) => {
